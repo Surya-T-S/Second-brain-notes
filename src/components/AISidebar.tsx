@@ -31,15 +31,27 @@ export function AISidebar() {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedSkill, setSelectedSkill] = useState<AISkill | null>(null);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<HTMLDivElement>(null);
   const [avatarError, setAvatarError] = useState(false);
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+  const scrollToBottom = (behavior: ScrollBehavior = 'smooth') => {
+    const el = messagesRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior });
+  };
+
+  const isNearBottom = () => {
+    const el = messagesRef.current;
+    if (!el) return true;
+    const threshold = 80; // px
+    return el.scrollHeight - el.scrollTop - el.clientHeight < threshold;
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // Only auto-scroll if the user is already near the bottom
+    if (isNearBottom()) {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const sendMessage = async (content: string, skill?: AISkill) => {
@@ -55,6 +67,8 @@ export function AISidebar() {
     setMessages(prev => [...prev, userMessage]);
     setInputValue('');
     setIsLoading(true);
+    // User just sent a message: stick to bottom
+    requestAnimationFrame(() => scrollToBottom('smooth'));
 
     try {
       const response = await fetch('/api/ai', {
@@ -73,7 +87,7 @@ export function AISidebar() {
       }
 
       const data = await response.json();
-      
+
       const aiMessage: AIMessage = {
         id: (Date.now() + 1).toString(),
         role: 'assistant',
@@ -81,7 +95,11 @@ export function AISidebar() {
         timestamp: new Date(),
       };
 
+      const stick = isNearBottom();
       setMessages(prev => [...prev, aiMessage]);
+      if (stick) {
+        requestAnimationFrame(() => scrollToBottom('smooth'));
+      }
     } catch (error) {
       console.error('Error sending message:', error);
       const errorMessage: AIMessage = {
@@ -108,9 +126,9 @@ export function AISidebar() {
   };
 
   return (
-    <div className="w-96 bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 flex flex-col">
+    <div className="w-96 h-full min-h-0 overflow-hidden bg-white dark:bg-gray-800 border-l border-gray-200 dark:border-gray-700 flex flex-col">
       {/* Header */}
-      <div className="p-4 border-b border-gray-200 dark:border-gray-700">
+      <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex-shrink-0">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold text-gray-900 dark:text-white">
             AI Thinking Partner
@@ -163,7 +181,7 @@ export function AISidebar() {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      <div ref={messagesRef} className="flex-1 overflow-y-auto p-4 space-y-4 min-h-0">
         {messages.length === 0 && (
           <div className="text-center text-gray-500 dark:text-gray-400 mt-8">
             <p>Start a conversation with your AI thinking partner!</p>
@@ -203,11 +221,11 @@ export function AISidebar() {
           </div>
         )}
         
-        <div ref={messagesEndRef} />
+        {/* sentinel removed; we scroll the container directly */}
       </div>
 
       {/* Input */}
-      <div className="p-4 border-t border-gray-200 dark:border-gray-700">
+      <div className="p-4 border-t border-gray-200 dark:border-gray-700 flex-shrink-0">
         {selectedSkill && (
           <div className="mb-2 p-2 bg-blue-50 dark:bg-blue-900/20 rounded-md">
             <p className="text-sm text-blue-800 dark:text-blue-200">
