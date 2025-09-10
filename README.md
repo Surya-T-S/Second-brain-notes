@@ -1,14 +1,35 @@
 # Second Brain Notes
 
-An intelligent note-taking application that acts as your true "second brain" - combining hierarchical outlining with AI-powered thinking partnership.
+Think in outlines. Capture fast. Zoom into ideas. Second Brain Notes blends the speed of an outliner with a clean, modern UI and an optional AI thinking partner when you want it.
 
 ## Overview
 
-This is a modern take on the classic hierarchical outliner (Dynalist/Workflowy style), refined for clarity and speed, and enhanced with:
+A modern take on the classic hierarchical outliner (Dynalist/Workflowy style), refined for clarity and speed, and enhanced with:
 
 - **AI Thinking Partner**: Context-aware AI that helps you elaborate, challenge ideas, and synthesize information
 - **Action Engine**: Google Calendar integration that transforms notes into actionable outcomes
 - **Semantic Knowledge Retrieval**: AI-powered search that understands meaning, not just keywords
+
+## How it Works
+
+- **Outliner-first editor**
+  - Every line is a node. Press Enter to create, Tab/Shift+Tab to change depth.
+  - Click a node with children to focus in. Breadcrumbs let you jump back out.
+  - Inline formatting: bold/italic/underline/strikethrough and adjustable inline sizes.
+
+- **Persistence & sync**
+  - Notes auto-save to Firestore as you type. Each user sees only their notes.
+  - Left panel groups notes by recency (Today, Yesterday, Last 7/30 Days, Older) with smooth, themed scrolling.
+
+- **AI assistant (optional)**
+  - The right sidebar acts as a thinking partner that works off your current context.
+  - Ask it to expand, summarize or extract action items while you outline.
+
+- **Export**
+  - One-click “Download PDF” exports your current note section with preserved formatting.
+
+- **Mobile & layout**
+  - On small screens, sidebars become slide-in drawers so the editor remains the primary typing surface.
 
 ## Features
 
@@ -29,53 +50,23 @@ This is a modern take on the classic hierarchical outliner (Dynalist/Workflowy s
 - Bi-directional linking with [[Note Title]] and backlinks
 - Semantic search across your graph using Gemini
 
-## Tech Stack
+## APIs & Services
 
-- **Frontend**: Next.js 14 with TypeScript and Tailwind CSS
-- **Backend**: Next.js API Routes (serverless)
-- **Database**: Firebase Firestore (Spark Plan)
-- **Authentication**: Firebase Auth with Google Sign-In
-- **AI**: Google Gemini 1.5 Flash API
-- **Hosting**: Vercel (Hobby Plan)
+- **Next.js 14 (App Router)** — UI, routing and serverless API endpoints.
+- **Firebase Firestore** — Stores notes (hierarchical nodes) per user; autosave on change.
+- **Firebase Auth (Google Sign-In)** — Authenticates users; notes are scoped to your account.
+- **Google Gemini 1.5 Flash** — Powers the AI sidebar via a server API route. Your prompts are handled server-side.
 
 ## Getting Started
 
-1. **Clone and Install**
-   ```bash
-   git clone <repository-url>
-   cd second-brain-notes
-   npm install
-   ```
+Clone, install dependencies, run the dev server:
 
-2. **Environment Setup**
-   Copy `.env.local` and fill in your API keys:
-   ```bash
-   # Firebase Configuration
-   NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
-   NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-   NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
-   NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-   NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
-   NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
-
-   # Gemini AI API Key
-   GEMINI_API_KEY=your_gemini_api_key
-   ```
-
-3. **Firebase Setup**
-   - Create a Firebase project
-   - Enable Firestore Database
-   - Enable Authentication with Google provider
-   - Add your domain to authorized domains
-
-4. **Gemini API Setup**
-   - Get API key from Google AI Studio
-   - Add to environment variables
-
-5. **Run Development Server**
-   ```bash
-   npm run dev
-   ```
+```bash
+git clone <repository-url>
+cd second-brain-notes
+npm install
+npm run dev
+```
 
 ## Usage
 
@@ -105,40 +96,6 @@ This is a modern take on the classic hierarchical outliner (Dynalist/Workflowy s
 - Alt+Left / Alt+Right — Outdent / Indent structurally
 - Up/Down at start/end — Navigate bullets
 
-## Architecture
-
-```
-src/
-├── app/
-│   ├── api/ai/          # Gemini API proxy
-│   ├── globals.css      # Tailwind + custom styles
-│   ├── layout.tsx       # Root layout
-│   └── page.tsx         # Main app page
-├── components/
-│   ├── AuthProvider.tsx # Firebase auth context
-│   ├── NotesEditor.tsx  # Core hierarchical editor
-│   └── AISidebar.tsx    # AI chat interface
-├── lib/
-│   ├── firebase.ts      # Firebase configuration
-│   └── noteService.ts   # Firestore operations
-└── types/
-    └── index.ts         # TypeScript definitions
-```
-
-## Security
-
-- API keys stored as Vercel environment variables
-- Firebase security rules protect user data
-- All external API calls routed through secure serverless functions
-- No client-side exposure of sensitive credentials
-
-## Roadmap
-
-This project follows a precise timeline with high-quality implementations:
-
-- **Sept 9-13**: MVP with core editor, Firebase, and basic AI
-- **Sept 14-18**: Calendar integration and semantic search
-- **Sept 19**: Final polish and demo
 
 ## License
 
