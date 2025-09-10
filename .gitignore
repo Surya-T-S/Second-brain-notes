@@ -1,0 +1,44 @@
+# Node / Next.js
+node_modules/
+.next/
+out/
+.next/cache/
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Vercel / Netlify
+.vercel/
+.netlify/
+
+# Coverage / build artifacts
+coverage/
+dist/
+build/
+
+# Local data / misc
+*.local
+*.swp
+*.swo
+*.orig
+
+# Firebase emulator / service configs (if any local files are used)
+.firebaserc
+.firebase/
+
+# TypeScript
+*.tsbuildinfo
+
+# Ignore all text files
+*.txt
