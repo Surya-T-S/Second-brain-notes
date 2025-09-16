@@ -1,102 +1,115 @@
-# Second Brain Notes
+# 🧠 Second Brain Notes
+> **Vibethon 2024 Submission**    
+> A modern remix of the classic notes app, enhanced with AI to transform how you think and organize knowledge.
 
-Think in outlines. Capture fast. Zoom into ideas. Second Brain Notes blends the speed of an outliner with a clean, modern UI and an optional AI thinking partner when you want it.
+Second Brain Notes reimagines traditional note-taking by combining the simplicity of hierarchical outlining with powerful AI integration. It helps you connect ideas, enhance understanding, and stay organized with a clean interface that scales with your thinking.
 
-## Overview
+## 🎯 The Problem
+Traditional note-taking apps are passive containers for information. They don't help you:
+- Connect related ideas across notes
+- Develop thoughts into actionable insights
+- Discover hidden patterns in your knowledge
+- Maintain focus during deep work sessions
 
-A modern take on the classic hierarchical outliner (Dynalist/Workflowy style), refined for clarity and speed, and enhanced with:
+Second Brain Notes solves these challenges by integrating AI directly into your note-taking workflow.
 
-- **AI Thinking Partner**: Context-aware AI that helps you elaborate, challenge ideas, and synthesize information
-- **Action Engine**: Google Calendar integration that transforms notes into actionable outcomes
-- **Semantic Knowledge Retrieval**: AI-powered search that understands meaning, not just keywords
+## ✨ Key Features
 
-## How it Works
+### Outlining Reimagined
+- **Infinite Nesting**: Organize thoughts hierarchically
+- **Focus Mode**: Zoom into any node for distraction-free work
+- **Real-time Sync**: Automatic saving to Firestore
+- **Rich Text**: Bold, italics, underlines, and more
 
-- **Outliner-first editor**
-  - Every line is a node. Press Enter to create, Tab/Shift+Tab to change depth.
-  - Click a node with children to focus in. Breadcrumbs let you jump back out.
-  - Inline formatting: bold/italic/underline/strikethrough and adjustable inline sizes.
+### Smart Organization
+- **Notebooks**: Organize notes into dedicated collections for projects, topics, or areas of interest
+- **Tags**: Add custom labels to notes for cross-notebook categorization and filtering
 
-- **Persistence & sync**
-  - Notes auto-save to Firestore as you type. Each user sees only their notes.
-  - Left panel groups notes by recency (Today, Yesterday, Last 7/30 Days, Older) with smooth, themed scrolling.
+### AI-Powered Intelligence
+- **Thinking Partner**: Context-aware suggestions as you type
+- **Smart Summarization**: Condense complex topics instantly
+- **Knowledge Connections**: Discover relationships between notes
+- **Semantic Search**: Find content by meaning, not keywords
 
-- **AI assistant (optional)**
-  - The right sidebar acts as a thinking partner that works off your current context.
-  - Ask it to expand, summarize or extract action items while you outline.
+### Designed for Productivity
+- **Clean Interface**: Minimalist design that stays out of your way
+- **Keyboard-Centric**: Speed up navigation with shortcuts
+- **Export Options**: Save as PDF with preserved formatting
+- **Mobile Ready**: Responsive design for all devices
 
-- **Export**
-  - One-click “Download PDF” exports your current note section with preserved formatting.
+## 🛠️ Technology Stack
+- **Next.js 14**: App Router for fast navigation
+- **Firebase**: Authentication and real-time database
+- **Google Gemini**: Powers AI features
+- **Tailwind CSS**: Responsive, modern styling
+- **TypeScript**: Type-safe development
 
-- **Mobile & layout**
-  - On small screens, sidebars become slide-in drawers so the editor remains the primary typing surface.
+## 🌐 Vibethon Relevance
+Second Brain Notes is a perfect example of remixing a classic app (notes) with modern innovations:
+- **AI Integration**: Transforming passive notes into an active thinking partner
+- **Semantic Understanding**: Going beyond keyword search to find meaning
+- **User Experience**: Modern interface with focus mode for deep work
+- **API Usage**: Integrates Firebase, Google Gemini, and upcoming Google Calendar scheduling for actionable workflows
 
-## Features
+## 🚀 Getting Started
 
-### Core
-- Infinitely nested bullet points with Tab / Shift+Tab
-- Focus mode with breadcrumbs (zoom into any node)
-- Clean indent guides for rapid visual parsing
-- Realtime sync via Firebase Firestore; Google sign-in
-- Elegant, responsive UI with glass surfaces and subtle motion
-- Export to PDF with formatting (bold/italic/underline/strikethrough, sizes)
+### Prerequisites
+- Node.js 18+ and npm 9+
+- Firebase account (for authentication and database)
+- Google Cloud account (for Gemini API access)
 
-### AI
-- Context-aware “thinking partner” in the right sidebar
-- Expand, summarize, extract action items; grounded by your current note
+### Installation
 
-### Planned
-- Calendar integration: natural language → schedule blocks
-- Bi-directional linking with [[Note Title]] and backlinks
-- Semantic search across your graph using Gemini
+1. Clone the repository:
 
-## APIs & Services
+    ```bash
+    git clone https://github.com/your-username/second-brain-notes.git
+    cd second-brain-notes
+    ```
 
-- **Next.js 14 (App Router)** — UI, routing and serverless API endpoints.
-- **Firebase Firestore** — Stores notes (hierarchical nodes) per user; autosave on change.
-- **Firebase Auth (Google Sign-In)** — Authenticates users; notes are scoped to your account.
-- **Google Gemini 1.5 Flash** — Powers the AI sidebar via a server API route. Your prompts are handled server-side.
+2. Install dependencies:
 
-## Getting Started
+    ```bash
+    npm install
+    ```
 
-Clone, install dependencies, run the dev server:
+3. Configure environment variables:
 
-```bash
-git clone <repository-url>
-cd second-brain-notes
-npm install
-npm run dev
-```
+    Create a `.env.local` file in the root directory with your Firebase and Google Cloud credentials. Example:
 
-## Usage
+    ```env
+    NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+    GEMINI_API_KEY=your_gemini_api_key
+    ```
 
-### Basic Note-Taking
-- Type to create bullet points
-- Press `Enter` to create new bullets
-- Use `Tab` to indent, `Shift+Tab` to outdent
-- Click bullets with children to focus (zoom in)
+4. Start the development server:
 
-### AI Thinking Partner
-- Use quick actions in the sidebar:
-  - **Expand**: Get detailed explanations
-  - **Summarize**: Create concise summaries
-  - **Extract Actions**: Find actionable tasks
-- Or chat freely for brainstorming and idea development
+    ```bash
+    npm run dev
+    ```
 
-### Focus Mode
-- Click any bullet point with nested content
-- Navigate with breadcrumbs
-- Perfect for managing complex hierarchies
+5. Open [http://localhost:3000](http://localhost:3000) in your browser and start outlining your thoughts!
 
-### Keyboard Shortcuts
-- Enter — New bullet
-- Tab / Shift+Tab — Indent / Outdent
-- Ctrl/Cmd+B, I, U — Bold, Italic, Underline
-- Ctrl/Cmd+Shift+X or Alt+Shift+5 — Strikethrough
-- Alt+Left / Alt+Right — Outdent / Indent structurally
-- Up/Down at start/end — Navigate bullets
+## 📖 Usage
 
+- Create bullet points by typing and pressing `Enter`.
+- Use `Tab` / `Shift+Tab` to nest or outdent items.
+- Click bullets to focus in and zoom into ideas.
+- Use the sidebar to expand, summarize, or extract action items with AI-powered suggestions.
+- Organize notes into notebooks and tag content for cross-referencing.
+- Export notes to PDF for sharing or archiving.
 
-## License
+## 🤝 Contributing
 
-MIT License - Built for focused work and clear thinking.
+Contributions are welcome! Feel free to fork the repository, create feature branches, and submit pull requests. We appreciate bug reports, feature requests, and feedback!
+
+## 📧 Contact
+
+For questions or suggestions, open an issue on GitHub or reach out to us at:  
+📩 **suryathekkini@gmail.com**
+
+---
+
+MIT License – Built for focused work and clear thinking.
